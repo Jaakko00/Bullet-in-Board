@@ -60,7 +60,7 @@ let connectionFunctions = {
     return new Promise((resolve, reject) => {
       connection.query(
         "INSERT INTO posts (content, create_time) VALUES (?, ?)",
-        [content, Date.now()],
+        [post.content, Date.now()],
         (err, result) => {
           if (err) {
             reject(err);

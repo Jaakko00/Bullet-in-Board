@@ -1,0 +1,9 @@
+curl -H "Content-type: application/json" -d "{\"content\": \"Second announcement\"}" http://localhost:8080/posts
+
+###
+
+curl http://localhost:8080/posts
+
+###
+
+curl -X DELETE http://localhost:8080/posts/1
