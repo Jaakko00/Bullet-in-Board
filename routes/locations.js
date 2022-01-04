@@ -3,9 +3,9 @@ var router = express.Router();
 const database = require("../database/crudrepository");
 
 router.get("/:urlId([1-9]+)", async (req, res) => {
-  let locationId = req.params.urlId;
-  let location = await database.findById(locationId);
-  res.send(location);
+  let postId = req.params.urlId;
+  let post = await database.findById(postId);
+  res.send(post);
 });
 
 router.get("/", async (req, res) => {
@@ -14,10 +14,10 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  let location = req.body;
-  console.log(location);
+  let post = req.body;
+  console.log(post);
   try {
-     let result = await database.save(location); 
+     let result = await database.save(post); 
      res.send(result);
   } catch(err) {
     console.log(err);
@@ -26,8 +26,8 @@ router.post("/", async (req, res) => {
 });
 
 router.delete("/:urlId([0-9]+)", async (req, res) => {
-  let locationId = req.params.urlId;
-  let result = await database.deleteById(locationId);
+  let postId = req.params.urlId;
+  let result = await database.deleteById(postId);
   res.status(204).send(result);
 });
 

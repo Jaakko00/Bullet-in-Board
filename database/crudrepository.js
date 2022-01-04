@@ -36,75 +36,48 @@ let connectionFunctions = {
   },
   findById: (id) => {
     return new Promise((resolve, reject) => {
-      connection.query(
-        "SELECT * FROM locations WHERE id = ?",
-        id,
-        (err, location) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(location);
-          }
+      connection.query("SELECT * FROM posts WHERE id = ?", id, (err, post) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(post);
         }
-      );
+      });
     });
   },
   deleteById: (id) => {
     return new Promise((resolve, reject) => {
+      connection.query("DELETE FROM posts WHERE id = ?", id, (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve("One row deleted");
+        }
+      });
+    });
+  },
+  save: (post) => {
+    return new Promise((resolve, reject) => {
       connection.query(
-        "DELETE FROM locations WHERE id = ?",
-        id,
+        "INSERT INTO posts (content, create_time) VALUES (?, ?)",
+        [content, Date.now()],
         (err, result) => {
           if (err) {
             reject(err);
           } else {
-            resolve("One row deleted");
+            resolve("One row added");
           }
         }
       );
     });
   },
-  save: (location) => {
-    return new Promise((resolve, reject) => {
-      const Schema = {
-        properties: {
-          latitude: {
-            type: "number",
-            minimum: -90,
-            maximum: 90,
-          },
-          longitude: {
-            type: "number",
-            minimum: -180,
-            maximum: 180,
-          },
-        },
-      };
-      let validation = validator.validate(location, Schema);
-      if (validation.errors.length > 0) {
-        console.log(validation.errors);
-      } else {
-        connection.query(
-          "INSERT INTO locations (latitude, longitude) VALUES (?, ?)",
-          [location.latitude, location.longitude],
-          (err, result) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve("One row added");
-            }
-          }
-        );
-      }
-    });
-  },
   findAll: () => {
     return new Promise((resolve, reject) => {
-      connection.query("SELECT * FROM locations", (err, locations) => {
+      connection.query("SELECT * FROM posts", (err, posts) => {
         if (err) {
           reject(err);
         } else {
-          resolve(locations);
+          resolve(posts);
         }
       });
     });
