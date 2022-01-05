@@ -1,10 +1,11 @@
 import "./App.css";
 import React from "react";
-import MapMarker from "./Posts";
+import Posts from "./Posts";
+import "bootstrap/dist/css/bootstrap.min.css";
 class App extends React.Component {
   render() {
     return (
-      <MapMarker></MapMarker>
+      <Posts></Posts>
     );
   }
 }

@@ -1,18 +1,18 @@
-
 import React from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 
 function Post(props) {
   return (
-    <Card className="text-center">
-      <Card.Header></Card.Header>
+    <Card className="m-2" style={{ width: "18rem" }}>
       <Card.Body>
-        <Card.Title>{props.id}</Card.Title>
-        <Card.Text>{props.content}</Card.Text>
-        <Button variant="danger">DELETE</Button>
+        <Card.Title>Card Title</Card.Title>
+        <Card.Subtitle>{props.create_time}</Card.Subtitle>
+        <Card.Text>
+          {props.content}
+        </Card.Text>
+        <Button>Delete</Button>
       </Card.Body>
-      <Card.Footer className="text-muted">{props.create_time}</Card.Footer>
     </Card>
   );
 }
