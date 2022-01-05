@@ -40,7 +40,7 @@ class Posts extends React.Component {
 
   render() {
     let posts = this.state.posts.map((post) => (
-      <Post key={post.id}>{post.content}</Post>
+      <Post key={post.id} content={post.content} id={post.id} create_time={post.create_time}></Post>
     ));
     return <>{posts}</>;
   }
