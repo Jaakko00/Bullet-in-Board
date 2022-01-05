@@ -1,5 +1,5 @@
 import "./App.css";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Post from "./Post";
 import { Button } from "react-bootstrap";
@@ -8,6 +8,8 @@ class Posts extends React.Component {
   constructor(props) {
     super(props);
     this.state = { posts: [] };
+
+    this.addNewPost = this.addNewPost.bind(this);
   }
 
   async componentDidMount() {
@@ -21,11 +23,11 @@ class Posts extends React.Component {
       });
   }
 
-  async addNewPost(e) {
+  async addNewPost() {
+    console.log("Adding");
     let newPost = {
-      id: Math.floor(Math.random() * 100000),
-      latitude: e.latlng.lat,
-      longitude: e.latlng.lng,
+      content: "New post",
+      create_time: Date.now,
     };
     axios
       .post("http://localhost:8080/posts", newPost)
@@ -50,7 +52,7 @@ class Posts extends React.Component {
     return (
       <>
         {posts}
-        <Button className="m-2">New post</Button>
+        <Button className="m-2" onClick={this.addNewPost}>New post</Button>
       </>
     );
   }
