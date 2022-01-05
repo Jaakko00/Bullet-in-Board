@@ -11,7 +11,7 @@ function Post(props) {
         <Card.Text>
           {props.content}
         </Card.Text>
-        <Button>Delete</Button>
+        <Button variant="danger">Delete</Button>
       </Card.Body>
     </Card>
   );

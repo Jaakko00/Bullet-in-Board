@@ -1,7 +1,8 @@
 import "./App.css";
 import React from "react";
 import axios from "axios";
-import Post from "./Post"
+import Post from "./Post";
+import { Button } from "react-bootstrap";
 
 class Posts extends React.Component {
   constructor(props) {
@@ -37,12 +38,21 @@ class Posts extends React.Component {
       });
   }
 
-
   render() {
     let posts = this.state.posts.map((post) => (
-      <Post key={post.id} content={post.content} id={post.id} create_time={post.create_time}></Post>
+      <Post
+        key={post.id}
+        content={post.content}
+        id={post.id}
+        create_time={post.create_time}
+      ></Post>
     ));
-    return <>{posts}</>;
+    return (
+      <>
+        {posts}
+        <Button className="m-2">New post</Button>
+      </>
+    );
   }
 }
 
