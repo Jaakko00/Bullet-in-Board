@@ -1,9 +1,21 @@
-curl -H "Content-type: application/json" -d "{\"content\": \"Second announcement\"}" http://localhost:8080/posts
 
-###
+### GET ALL ROWS
 
-curl http://localhost:8080/posts
+GET http://localhost:8080/posts
 
-###
+### GET ROW BY ID
 
-curl -X DELETE http://localhost:8080/posts/1
+GET http://localhost:8080/posts/1
+
+### DELETE ROW BY ID
+
+DELETE http://localhost:8080/posts/3
+
+### ADD NEW ROW
+
+POST http://localhost:8080/posts
+Content-Type: application/json
+
+{
+    "content": "Announcement"
+}
