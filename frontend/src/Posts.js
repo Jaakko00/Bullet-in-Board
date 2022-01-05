@@ -1,6 +1,7 @@
 import "./App.css";
 import React from "react";
 import axios from "axios";
+import Post from "./Post"
 
 class Posts extends React.Component {
   constructor(props) {
@@ -39,7 +40,7 @@ class Posts extends React.Component {
 
   render() {
     let posts = this.state.posts.map((post) => (
-      <h1 key={post.id}>{post.content}</h1>
+      <Post key={post.id}>{post.content}</Post>
     ));
     return <>{posts}</>;
   }
