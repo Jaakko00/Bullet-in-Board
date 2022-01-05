@@ -2,6 +2,7 @@ import "./App.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Post from "./Post";
+import PostForm from "./PostForm";
 import { Button } from "react-bootstrap";
 
 class Posts extends React.Component {
@@ -23,10 +24,10 @@ class Posts extends React.Component {
       });
   }
 
-  async addNewPost() {
+  async addNewPost(text) {
     console.log("Adding");
     let newPost = {
-      content: "New post",
+      content: text,
       create_time: Date.now,
     };
     axios
@@ -51,8 +52,8 @@ class Posts extends React.Component {
     ));
     return (
       <>
+        <PostForm post={this.addNewPost}></PostForm>
         {posts}
-        <Button className="m-2" onClick={this.addNewPost}>New post</Button>
       </>
     );
   }
