@@ -42,18 +42,28 @@ class Posts extends React.Component {
       });
   }
 
+  async deletePost(post) {
+    axios
+      .delete(`http://localhost:8080/posts/${post.id}`)
+      .then((response) => {
+        this.setState({  });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   render() {
     let posts = this.state.posts.map((post) => (
       <Post
         key={post.id}
-        content={post.content}
-        id={post.id}
-        create_time={post.create_time}
+        post={post}
+        delete={this.deletePost}
       ></Post>
     ));
     return (
       <>
-        <PostForm post={this.addNewPost}></PostForm>
+        <PostForm post={this.addNewPost} ></PostForm>
         {posts}
       </>
     );
