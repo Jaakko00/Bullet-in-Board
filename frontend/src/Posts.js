@@ -28,8 +28,9 @@ class Posts extends React.Component {
     console.log("Adding");
     let newPost = {
       content: text,
-      create_time: Date.now,
+      create_time: new Date().toISOString().slice(0, 10),
     };
+    
     axios
       .post("http://localhost:8080/posts", newPost)
       .catch((error) => {
