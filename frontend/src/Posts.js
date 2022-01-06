@@ -56,7 +56,8 @@ class Posts extends React.Component {
   }
 
   render() {
-    let posts = this.state.posts.map((post) => (
+    let sortedPosts = this.state.posts.sort((a, b) => b.id - a.id);
+    let posts = sortedPosts.map((post) => (
       <Post
         key={post.id}
         post={post}
