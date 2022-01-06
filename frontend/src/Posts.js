@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Post from "./Post";
 import PostForm from "./PostForm";
-import { Button } from "react-bootstrap";
+
 
 class Posts extends React.Component {
   constructor(props) {
@@ -11,6 +11,7 @@ class Posts extends React.Component {
     this.state = { posts: [] };
 
     this.addNewPost = this.addNewPost.bind(this);
+    this.deletePost = this.deletePost.bind(this);
   }
 
   async componentDidMount() {
@@ -46,7 +47,8 @@ class Posts extends React.Component {
     axios
       .delete(`http://localhost:8080/posts/${post.id}`)
       .then((response) => {
-        this.setState({  });
+        this.setState({posts: this.state.posts.filter(postToStay => postToStay.id !== post.id)});
+        console.log(this.state.posts);
       })
       .catch((error) => {
         console.log(error);
