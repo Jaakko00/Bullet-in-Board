@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 function Post(props) {
 
   return (
-    <Card className="m-2" style={{ width: "18rem" }}>
+    <Card className="m-2" style={{ width: "30rem" }}>
       <Card.Body>
         <Card.Title>Card Title</Card.Title>
         <Card.Subtitle>{props.post.create_time}</Card.Subtitle>

@@ -3,16 +3,22 @@ import { Button, Form } from "react-bootstrap";
 
 function PostForm(props) {
 
-  const [content, setContent] = useState("Text");
+  const [content, setContent] = useState("");
 
   const onChange = (e) => {
     setContent(e.currentTarget.value);
   };
   return (
-    <Form>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+    <Form className="m-2" style={{ width: "30rem" }}>
+      <Form.Group className="mb-3" controlId="Form.ControlTextarea1">
         <Form.Label>New post</Form.Label>
-        <Form.Control type="text" value={content} onChange={onChange} />
+        <Form.Control
+          as="textarea"
+          rows={3}
+          placeholder="Text"
+          value={content}
+          onChange={onChange}
+        />
       </Form.Group>
       <Button
         variant="primary"
