@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
+var filter = require("leo-profanity");
 
 function PostForm(props) {
+
 
   const [content, setContent] = useState("");
 
@@ -23,7 +25,7 @@ function PostForm(props) {
       <Button
         variant="primary"
         type="submit"
-        onClick={() => props.post(content)}
+        onClick={() => props.post(filter.clean(content))}
       >
         Submit
       </Button>
