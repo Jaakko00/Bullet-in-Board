@@ -1,9 +1,9 @@
 import "./App.css";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import axios from "axios";
 import Post from "./Post";
 import PostForm from "./PostForm";
-
+import { Row, Container, Col } from "react-bootstrap";
 
 class Posts extends React.Component {
   constructor(props) {
@@ -28,19 +28,18 @@ class Posts extends React.Component {
   async addNewPost(text, sender, title) {
     console.log("Adding");
     function randomColor() {
-        var randomnumber = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
-        if(randomnumber === 1) {
-            return "success";
-        }
-        if (randomnumber === 2) {
-          return "danger";
-        }
-        if (randomnumber === 3) {
-          return "warning";
-        }
-        else {
-          return "info";
-        }
+      var randomnumber = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
+      if (randomnumber === 1) {
+        return "success";
+      }
+      if (randomnumber === 2) {
+        return "danger";
+      }
+      if (randomnumber === 3) {
+        return "warning";
+      } else {
+        return "info";
+      }
     }
     let create_time = new Date().toISOString().slice(0, 10);
     let color = randomColor();
@@ -49,10 +48,9 @@ class Posts extends React.Component {
       create_time: create_time,
       sender: sender,
       title: title,
-      color: color
+      color: color,
     };
     console.log(color);
-
 
     axios
       .post("http://localhost:8080/posts", newPost)
@@ -69,7 +67,11 @@ class Posts extends React.Component {
     axios
       .delete(`http://localhost:8080/posts/${post.id}`)
       .then((response) => {
-        this.setState({posts: this.state.posts.filter(postToStay => postToStay.id !== post.id)});
+        this.setState({
+          posts: this.state.posts.filter(
+            (postToStay) => postToStay.id !== post.id
+          ),
+        });
         console.log(this.state.posts);
       })
       .catch((error) => {
@@ -80,17 +82,17 @@ class Posts extends React.Component {
   render() {
     let sortedPosts = this.state.posts.sort((a, b) => b.id - a.id);
     let posts = sortedPosts.map((post) => (
-      <Post
-        key={post.id}
-        post={post}
-        delete={this.deletePost}
-      ></Post>
+      <Post key={post.id} post={post} delete={this.deletePost}></Post>
     ));
     return (
-      <>
-        <PostForm post={this.addNewPost} ></PostForm>
-        {posts}
-      </>
+      <Container>
+        <Row sm="1" md="1" lg="1" xl="2" >
+          <Col>
+            <PostForm post={this.addNewPost}></PostForm>
+          </Col>
+          <Col>{posts}</Col>
+        </Row>
+      </Container>
     );
   }
 }
