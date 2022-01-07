@@ -25,11 +25,12 @@ class Posts extends React.Component {
       });
   }
 
-  async addNewPost(text) {
+  async addNewPost(text, sender) {
     console.log("Adding");
     let newPost = {
       content: text,
       create_time: new Date().toISOString().slice(0, 10),
+      sender: sender
     };
     
     axios

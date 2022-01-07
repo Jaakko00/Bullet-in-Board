@@ -8,11 +8,16 @@ function Post(props) {
     <Card className="m-2" style={{ width: "30rem" }}>
       <Card.Body>
         <Card.Title>Card Title</Card.Title>
-        <Card.Subtitle>{props.post.create_time}</Card.Subtitle>
-        <Card.Text>
-          {props.post.content}
-        </Card.Text>
-        <Button variant="danger" onClick={() => props.delete(props.post)}>Delete</Button>
+        <Card.Subtitle className="mb-2 text-muted">
+          {props.post.create_time}
+        </Card.Subtitle>
+        <Card.Text>{props.post.content}</Card.Text>
+        <Card.Subtitle className="mb-2 text-muted">
+          -{props.post.sender}
+        </Card.Subtitle>
+        <Button variant="danger" onClick={() => props.delete(props.post)}>
+          Delete
+        </Button>
       </Card.Body>
     </Card>
   );

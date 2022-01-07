@@ -3,13 +3,16 @@ import { Button, Form } from "react-bootstrap";
 var filter = require("leo-profanity");
 
 function PostForm(props) {
-
-
   const [content, setContent] = useState("");
+  const [sender, setSender] = useState("");
 
-  const onChange = (e) => {
+  const onChangeContent = (e) => {
     setContent(e.currentTarget.value);
   };
+  const onChangeSender = (e) => {
+    setSender(e.currentTarget.value);
+  };
+
   return (
     <Form className="m-2" style={{ width: "30rem" }}>
       <Form.Group className="mb-3" controlId="Form.ControlTextarea1">
@@ -19,13 +22,20 @@ function PostForm(props) {
           rows={3}
           placeholder="Text"
           value={content}
-          onChange={onChange}
+          onChange={onChangeContent}
         />
       </Form.Group>
+      <Form.Control
+        className="mb-3"
+        type="text"
+        placeholder="From"
+        value={sender}
+        onChange={onChangeSender}
+      />
       <Button
         variant="primary"
         type="submit"
-        onClick={() => props.post(filter.clean(content))}
+        onClick={() => props.post(filter.clean(content), filter.clean(sender))}
       >
         Submit
       </Button>
