@@ -27,13 +27,16 @@ class Posts extends React.Component {
 
   async addNewPost(text, sender, title) {
     console.log("Adding");
+    let create_time = new Date().toISOString().slice(0, 10);
     let newPost = {
       content: text,
-      create_time: new Date().toISOString().slice(0, 10),
+      create_time: create_time,
       sender: sender,
-      title: title
+      title: title,
     };
-    
+    console.log(create_time);
+
+
     axios
       .post("http://localhost:8080/posts", newPost)
       .catch((error) => {

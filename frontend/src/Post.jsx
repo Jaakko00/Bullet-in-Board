@@ -13,7 +13,8 @@ function Post(props) {
         </Card.Subtitle>
         <Card.Text>{props.post.content}</Card.Text>
         <Card.Subtitle className="mb-2 text-muted">
-          -{props.post.sender}
+          {props.post.sender && "-" + props.post.sender}
+          {!props.post.sender && "-Anonymous"}
         </Card.Subtitle>
         <Button variant="danger" onClick={() => props.delete(props.post)}>
           Delete
