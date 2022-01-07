@@ -27,7 +27,7 @@ function PostForm(props) {
         New post
       </Button>
 
-      <Offcanvas show={show} onHide={handleClose} style={{ width: "35rem" }}>
+      <Offcanvas show={show} onHide={handleClose} style={{ width: "35rem" }} scroll={true}  backdrop={false}>
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>New post</Offcanvas.Title>
         </Offcanvas.Header>
@@ -64,6 +64,7 @@ function PostForm(props) {
           </Form>
 
           <Button
+            className="m-2"
             variant="primary"
             type="submit"
             onClick={() =>
