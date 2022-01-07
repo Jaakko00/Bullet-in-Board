@@ -12,7 +12,7 @@ function Post(props) {
       style={{ width: "30rem" }}
     >
       <Card.Body>
-        <Card.Title>{props.post.title}</Card.Title>
+        <Card.Title className="lead">{props.post.title} </Card.Title>
         <Card.Subtitle className="mb-2 text-light">
           {props.post.create_time}
         </Card.Subtitle>
