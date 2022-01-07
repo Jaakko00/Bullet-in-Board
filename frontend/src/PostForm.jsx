@@ -1,11 +1,15 @@
 import React, { useState } from "react";
-import { Button, Form, Navbar, Nav, Container } from "react-bootstrap";
+import { Button, Form, Offcanvas } from "react-bootstrap";
 var filter = require("leo-profanity");
 
 function PostForm(props) {
   const [content, setContent] = useState("");
   const [sender, setSender] = useState("");
   const [title, setTitle] = useState("");
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const onChangeContent = (e) => {
     setContent(e.currentTarget.value);
@@ -19,56 +23,62 @@ function PostForm(props) {
 
   return (
     <>
-      <Navbar bg="dark" expand="lg" fixed="bottom">
-        <Container>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto"></Nav>
-            
-            <Form className="m-2" style={{ width: "10rem" }}>
-              <Form.Control
-                className="mb-3"
-                type="text"
-                placeholder="Title"
-                value={title}
-                onChange={onChangeTitle}
-              />
-            </Form>
-            <Form className="m-2" style={{ width: "30rem" }}>
-              <Form.Control
-                as="textarea"
-                rows={3}
-                placeholder="Text"
-                value={content}
-                onChange={onChangeContent}
-              />
-            </Form>
-            <Form className="m-2" style={{ width: "10rem" }}>
-              <Form.Control
-                className="mb-3"
-                type="text"
-                placeholder="From"
-                value={sender}
-                onChange={onChangeSender}
-              />
-            </Form>
-            <Button
-              variant="primary"
-              type="submit"
-              onClick={() =>
-                props.post(
-                  filter.clean(content),
-                  filter.clean(sender),
-                  filter.clean(title)
-                )
-              }
-            >
-              Submit
-            </Button>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-      
+      <Button variant="primary" onClick={handleShow} className="m-2">
+        New post
+      </Button>
+
+      <Offcanvas show={show} onHide={handleClose} style={{ width: "35rem" }}>
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>New post</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+
+          <Form className="m-2" style={{ width: "10rem" }}>
+            <Form.Control
+              className="mb-3"
+              type="text"
+              placeholder="Title"
+              value={title}
+              onChange={onChangeTitle}
+            />
+          </Form>
+
+          <Form className="m-2" style={{ width: "30rem" }}>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              placeholder="Text"
+              value={content}
+              onChange={onChangeContent}
+            />
+          </Form>
+
+          <Form className="m-2" style={{ width: "10rem" }}>
+            <Form.Control
+              className="mb-3"
+              type="text"
+              placeholder="From"
+              value={sender}
+              onChange={onChangeSender}
+            />
+          </Form>
+
+          <Button
+            variant="primary"
+            type="submit"
+            onClick={() =>
+              props.post(
+                filter.clean(content),
+                filter.clean(sender),
+                filter.clean(title)
+              )
+              
+            }
+          >
+            Submit
+          </Button>
+        </Offcanvas.Body>
+      </Offcanvas>
     </>
   );
 }

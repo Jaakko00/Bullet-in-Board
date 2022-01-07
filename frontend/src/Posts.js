@@ -3,7 +3,7 @@ import React from "react";
 import axios from "axios";
 import Post from "./Post";
 import PostForm from "./PostForm";
-
+import { Row, Col, Container } from "react-bootstrap";
 
 class Posts extends React.Component {
   constructor(props) {
@@ -24,8 +24,6 @@ class Posts extends React.Component {
         console.log(error);
       });
   }
-
-  
 
   async addNewPost(text, sender, title) {
     console.log("Adding post");
@@ -95,7 +93,8 @@ class Posts extends React.Component {
     return (
       <>
         <PostForm post={this.addNewPost}></PostForm>
-        {posts}
+
+        <Row className="justify-content-center">{posts}</Row>
       </>
     );
   }
