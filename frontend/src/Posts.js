@@ -3,7 +3,7 @@ import React from "react";
 import axios from "axios";
 import Post from "./Post";
 import PostForm from "./PostForm";
-import { Row, Container, Col } from "react-bootstrap";
+
 
 class Posts extends React.Component {
   constructor(props) {
@@ -24,6 +24,8 @@ class Posts extends React.Component {
         console.log(error);
       });
   }
+
+  
 
   async addNewPost(text, sender, title) {
     console.log("Adding post");
@@ -50,7 +52,7 @@ class Posts extends React.Component {
       title: title,
       color: color,
     };
-
+    console.log(newPost);
     axios
       .post("http://localhost:8080/posts", newPost)
       .catch((error) => {
@@ -58,7 +60,14 @@ class Posts extends React.Component {
       })
       .then((response) => {
         console.log("Added new post");
-        this.setState({ posts: [...this.state.posts, newPost] });
+        axios
+          .get("http://localhost:8080/posts")
+          .then((response) => {
+            this.setState({ posts: response.data });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       });
   }
 
@@ -86,7 +95,6 @@ class Posts extends React.Component {
     return (
       <>
         <PostForm post={this.addNewPost}></PostForm>
-
         {posts}
       </>
     );

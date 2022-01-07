@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Form, Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
+import { Button, Form, Navbar, Nav, Container } from "react-bootstrap";
 var filter = require("leo-profanity");
 
 function PostForm(props) {
@@ -24,6 +24,7 @@ function PostForm(props) {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto"></Nav>
+            
             <Form className="m-2" style={{ width: "10rem" }}>
               <Form.Control
                 className="mb-3"
