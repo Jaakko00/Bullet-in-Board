@@ -26,7 +26,7 @@ class Posts extends React.Component {
   }
 
   async addNewPost(text, sender, title) {
-    console.log("Adding");
+    console.log("Adding post");
     function randomColor() {
       var randomnumber = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
       if (randomnumber === 1) {
@@ -50,7 +50,6 @@ class Posts extends React.Component {
       title: title,
       color: color,
     };
-    console.log(color);
 
     axios
       .post("http://localhost:8080/posts", newPost)
@@ -85,14 +84,11 @@ class Posts extends React.Component {
       <Post key={post.id} post={post} delete={this.deletePost}></Post>
     ));
     return (
-      <Container>
-        <Row sm="1" md="1" lg="1" xl="2" >
-          <Col>
-            <PostForm post={this.addNewPost}></PostForm>
-          </Col>
-          <Col>{posts}</Col>
-        </Row>
-      </Container>
+      <>
+        <PostForm post={this.addNewPost}></PostForm>
+
+        {posts}
+      </>
     );
   }
 }
