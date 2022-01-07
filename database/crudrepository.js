@@ -59,8 +59,8 @@ let connectionFunctions = {
   save: (post) => {
     return new Promise((resolve, reject) => {
       connection.query(
-        "INSERT INTO posts (content, create_time, sender) VALUES (?, ?, ?)",
-        [post.content, post.create_time, post.sender],
+        "INSERT INTO posts (content, create_time, sender, title) VALUES (?, ?, ?, ?)",
+        [post.content, post.create_time, post.sender, post.title],
         (err, result) => {
           if (err) {
             reject(err);

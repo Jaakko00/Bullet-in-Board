@@ -7,7 +7,7 @@ function Post(props) {
   return (
     <Card className="m-2" style={{ width: "30rem" }}>
       <Card.Body>
-        <Card.Title>Card Title</Card.Title>
+        <Card.Title>{props.post.title}</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">
           {props.post.create_time}
         </Card.Subtitle>

@@ -5,6 +5,7 @@ var filter = require("leo-profanity");
 function PostForm(props) {
   const [content, setContent] = useState("");
   const [sender, setSender] = useState("");
+  const [title, setTitle] = useState("");
 
   const onChangeContent = (e) => {
     setContent(e.currentTarget.value);
@@ -12,11 +13,21 @@ function PostForm(props) {
   const onChangeSender = (e) => {
     setSender(e.currentTarget.value);
   };
+  const onChangeTitle = (e) => {
+    setTitle(e.currentTarget.value);
+  };
 
   return (
     <Form className="m-2" style={{ width: "30rem" }}>
+      <Form.Label>New post</Form.Label>
+      <Form.Control
+        className="mb-3"
+        type="text"
+        placeholder="Title"
+        value={title}
+        onChange={onChangeTitle}
+      />
       <Form.Group className="mb-3" controlId="Form.ControlTextarea1">
-        <Form.Label>New post</Form.Label>
         <Form.Control
           as="textarea"
           rows={3}
@@ -35,7 +46,13 @@ function PostForm(props) {
       <Button
         variant="primary"
         type="submit"
-        onClick={() => props.post(filter.clean(content), filter.clean(sender))}
+        onClick={() =>
+          props.post(
+            filter.clean(content),
+            filter.clean(sender),
+            filter.clean(title)
+          )
+        }
       >
         Submit
       </Button>
