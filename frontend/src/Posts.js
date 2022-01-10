@@ -25,8 +25,22 @@ class Posts extends React.Component {
       });
   }
 
+  /**
+   * addNewPost adds a new post to the database
+   * 
+   * After randomly deciding for a color, it creates a newPost with all the given information, and then sends that to the database
+   * @param {string} text 
+   * @param {string} sender 
+   * @param {string} title 
+   */
   async addNewPost(text, sender, title) {
     console.log("Adding post");
+
+
+    /**
+     * randomColor randomly chooses out of 4 bootstrap colors
+     * @returns {string} color
+     */
     function randomColor() {
       var randomnumber = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
       if (randomnumber === 1) {
@@ -41,6 +55,7 @@ class Posts extends React.Component {
         return "info";
       }
     }
+
     let create_time = new Date().toISOString().slice(0, 10);
     let color = randomColor();
     let newPost = {
@@ -69,6 +84,10 @@ class Posts extends React.Component {
       });
   }
 
+  /**
+   * deletePost finds the id of the post given, and deletes it off the database and state
+   * @param {object} post 
+   */
   async deletePost(post) {
     axios
       .delete(`http://localhost:8080/posts/${post.id}`)
