@@ -3,6 +3,9 @@ const Validator = require("jsonschema").Validator;
 const validator = new Validator();
 require("dotenv").config();
 
+/**
+ * connection has inside all the variables of the connectionpool
+ */
 var connection = mysql.createPool({
   connectionLimit: 10,
   host: process.env.DB_HOST,
@@ -11,7 +14,13 @@ var connection = mysql.createPool({
   database: process.env.DB_DB,
 });
 
+/**
+ * connectionFunctions is a collection of database functions
+ */
 let connectionFunctions = {
+  /**
+   * connect establishes a connection to the database
+   */
   connect: () => {
     return new Promise((resolve, reject) => {
       connection.connect((err, result) => {
@@ -23,6 +32,10 @@ let connectionFunctions = {
       });
     });
   },
+  /**
+   * close closes the database connection and then calls the callback function
+   * @param {function} callback 
+   */
   close: (callback) => {
     return new Promise((resolve, reject) => {
       connection.end((err) => {
@@ -34,6 +47,10 @@ let connectionFunctions = {
       });
     });
   },
+  /**
+   * findById finds an object from the database with the given id
+   * @param {int} id 
+   */
   findById: (id) => {
     return new Promise((resolve, reject) => {
       connection.query("SELECT * FROM posts WHERE id = ?", id, (err, post) => {
@@ -45,6 +62,10 @@ let connectionFunctions = {
       });
     });
   },
+  /**
+   * deleteById finds and deletes an object from the database with the given id
+   * @param {int} id 
+   */
   deleteById: (id) => {
     return new Promise((resolve, reject) => {
       connection.query("DELETE FROM posts WHERE id = ?", id, (err, result) => {
@@ -56,6 +77,10 @@ let connectionFunctions = {
       });
     });
   },
+  /**
+   * post inserts a new object into the database
+   * @param {object} post 
+   */
   save: (post) => {
     return new Promise((resolve, reject) => {
       connection.query(
@@ -71,6 +96,9 @@ let connectionFunctions = {
       );
     });
   },
+  /**
+   * findAll finds all entries in the database
+   */
   findAll: () => {
     return new Promise((resolve, reject) => {
       connection.query("SELECT * FROM posts", (err, posts) => {
