@@ -78,7 +78,7 @@ function PostForm(props) {
                 className="m-2"
                 variant="primary"
                 type="submit"
-                onClick={async () =>
+                onClick={() =>
                   props
                     .post(
                       filter.clean(content),
