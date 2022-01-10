@@ -12,12 +12,17 @@ function PostForm(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  /** onChangeContent sets the state of content with given value */
   const onChangeContent = (e) => {
     setContent(e.currentTarget.value);
   };
+
+  /** onChangeSender sets the state of content with given value */
   const onChangeSender = (e) => {
     setSender(e.currentTarget.value);
   };
+
+  /** onChangeTitle sets the state of content with given value */
   const onChangeTitle = (e) => {
     setTitle(e.currentTarget.value);
   };
@@ -81,10 +86,12 @@ function PostForm(props) {
                 onClick={() =>
                   props
                     .post(
-                      filter.clean(content),
+                      //filter.clean filters all profanity of a given string
+                      filter.clean(content), 
                       filter.clean(sender),
                       filter.clean(title)
                     )
+                    //After posting, the state is emptied to avoid doubleposting
                     .then(setContent(""))
                     .then(setSender(""))
                     .then(setTitle(""))
