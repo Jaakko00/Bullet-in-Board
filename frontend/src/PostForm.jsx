@@ -26,7 +26,9 @@ function PostForm(props) {
     <>
       <Navbar bg="light" expand={false}>
         <Container fluid>
-          <Navbar.Brand href="#" className="display-1">Bulletin board</Navbar.Brand>
+          <Navbar.Brand href="#" className="display-1">
+            Bulletin board
+          </Navbar.Brand>
           <Navbar.Toggle>New post</Navbar.Toggle>
           <Navbar.Offcanvas
             id="offcanvasNavbar"
@@ -76,12 +78,16 @@ function PostForm(props) {
                 className="m-2"
                 variant="primary"
                 type="submit"
-                onClick={() =>
-                  props.post(
-                    filter.clean(content),
-                    filter.clean(sender),
-                    filter.clean(title)
-                  )
+                onClick={async () =>
+                  props
+                    .post(
+                      filter.clean(content),
+                      filter.clean(sender),
+                      filter.clean(title)
+                    )
+                    .then(setContent(""))
+                    .then(setSender(""))
+                    .then(setTitle(""))
                 }
               >
                 Submit
@@ -90,7 +96,6 @@ function PostForm(props) {
           </Navbar.Offcanvas>
         </Container>
       </Navbar>
-
     </>
   );
 }

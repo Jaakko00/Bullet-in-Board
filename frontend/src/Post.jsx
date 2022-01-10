@@ -21,11 +21,12 @@ function Post(props) {
           {props.post.sender && "-" + props.post.sender}
           {!props.post.sender && "-Anonymous"}
         </Card.Subtitle>
-        <Button variant="danger" onClick={() => props.delete(props.post)}>
+        <Button variant="dark" color="white" onClick={() => props.delete(props.post)}>
           Delete
         </Button>
       </Card.Body>
     </Card>
+    
   );
 }
 
