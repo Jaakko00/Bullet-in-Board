@@ -3,7 +3,6 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 
 function Post(props) {
-    
   return (
     <Card
       bg={props.post.color}
@@ -18,15 +17,19 @@ function Post(props) {
         </Card.Subtitle>
         <Card.Text className="text-white">{props.post.content}</Card.Text>
         <Card.Subtitle className="mb-2 text-light">
+          {/*If the input of sender is empty, it outputs "-Anonymous" */}
           {props.post.sender && "-" + props.post.sender}
           {!props.post.sender && "-Anonymous"}
         </Card.Subtitle>
-        <Button variant="dark" color="white" onClick={() => props.delete(props.post)}>
+        <Button
+          variant="dark"
+          color="white"
+          onClick={() => props.delete(props.post)}
+        >
           Delete
         </Button>
       </Card.Body>
     </Card>
-    
   );
 }
 
