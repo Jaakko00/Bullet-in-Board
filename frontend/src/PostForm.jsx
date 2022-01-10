@@ -1,16 +1,14 @@
 import React, { useState } from "react";
-import { Button, Form, Offcanvas, Navbar, Nav, NavDropdown, Container, FormControl } from "react-bootstrap";
-import NavbarToggle from "react-bootstrap/esm/NavbarToggle";
+import { Button, Form, Offcanvas, Navbar, Container,  } from "react-bootstrap";
+
 var filter = require("leo-profanity");
 
 function PostForm(props) {
   const [content, setContent] = useState("");
   const [sender, setSender] = useState("");
   const [title, setTitle] = useState("");
-  const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+
 
   /** onChangeContent sets the state of content with given value */
   const onChangeContent = (e) => {
