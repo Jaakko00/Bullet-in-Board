@@ -41,20 +41,26 @@ function PostForm(props) {
             <Form.Control
               className="mb-3"
               type="password"
+              value={password}
               placeholder="Password"
               onChange={onChangePassword}
             />
           </Form>
 
           <Button
+            type="submit"
             onClick={() => {
-              if (password === "abc") {
+              if (
+                password === "abc" ||
+                props.showDeleteButton() === "visible"
+              ) {
                 props.showDelete();
+                setPassword("");
               }
-            }
-          }
+            }}
           >
-            Show Delete
+            {props.showDeleteButton() === "invisible" && "Login"}
+            {props.showDeleteButton() === "visible" && "Logout"}
           </Button>
 
           <Navbar.Toggle>New post</Navbar.Toggle>

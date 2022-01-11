@@ -106,7 +106,7 @@ class Posts extends React.Component {
 
   handleShowDeleteButton() {
     this.setState(({showDelete}) => ({ showDelete: !showDelete }));
-    console.log("shoDelete state changed to: " + this.state.showDelete);
+    console.log("showDelete state changed to: " + this.state.showDelete);
   }
 
   showDeleteButton() {
@@ -134,6 +134,7 @@ class Posts extends React.Component {
         <PostForm
           post={this.addNewPost}
           showDelete={this.handleShowDeleteButton}
+          showDeleteButton={this.showDeleteButton}
         ></PostForm>
 
         <Row className="justify-content-center">{posts}</Row>
