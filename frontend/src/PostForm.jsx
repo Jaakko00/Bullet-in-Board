@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Form, Offcanvas, Navbar, Container,  } from "react-bootstrap";
+import { Button, Form, Offcanvas, Navbar, Container } from "react-bootstrap";
 
 var filter = require("leo-profanity");
 
@@ -7,8 +7,7 @@ function PostForm(props) {
   const [content, setContent] = useState("");
   const [sender, setSender] = useState("");
   const [title, setTitle] = useState("");
-
-
+  const [password, setPassword] = useState("");
 
   /** onChangeContent sets the state of content with given value */
   const onChangeContent = (e) => {
@@ -25,6 +24,11 @@ function PostForm(props) {
     setTitle(e.currentTarget.value);
   };
 
+  /** onChangePassword sets the state of password with given value */
+  const onChangePassword = (e) => {
+    setPassword(e.currentTarget.value);
+  };
+
   return (
     <>
       <Navbar bg="light" expand={false}>
@@ -32,9 +36,27 @@ function PostForm(props) {
           <Navbar.Brand href="#" className="display-1">
             Bulletin board
           </Navbar.Brand>
-          <Button onClick={() => {
-            props.showDelete()
-          }}>Show Delete</Button>
+
+          <Form className="m-2" style={{ width: "10rem" }}>
+            <Form.Control
+              className="mb-3"
+              type="password"
+              placeholder="Password"
+              onChange={onChangePassword}
+            />
+          </Form>
+
+          <Button
+            onClick={() => {
+              if (password === "abc") {
+                props.showDelete();
+              }
+            }
+          }
+          >
+            Show Delete
+          </Button>
+
           <Navbar.Toggle>New post</Navbar.Toggle>
           <Navbar.Offcanvas
             id="offcanvasNavbar"
@@ -88,7 +110,7 @@ function PostForm(props) {
                   props
                     .post(
                       //filter.clean filters all profanity of a given string
-                      filter.clean(content), 
+                      filter.clean(content),
                       filter.clean(sender),
                       filter.clean(title)
                     )
