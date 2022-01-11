@@ -3,7 +3,7 @@ import React from "react";
 import axios from "axios";
 import Post from "./Post";
 import PostForm from "./PostForm";
-import { Row, Col, Container } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 
 class Posts extends React.Component {
   constructor(props) {
