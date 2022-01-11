@@ -32,6 +32,9 @@ function PostForm(props) {
           <Navbar.Brand href="#" className="display-1">
             Bulletin board
           </Navbar.Brand>
+          <Button onClick={() => {
+            props.showDelete()
+          }}>Show Delete</Button>
           <Navbar.Toggle>New post</Navbar.Toggle>
           <Navbar.Offcanvas
             id="offcanvasNavbar"

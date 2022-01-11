@@ -1,8 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 
 function Post(props) {
+
+
   return (
     <Card
       bg={props.post.color}
@@ -22,6 +24,7 @@ function Post(props) {
           {!props.post.sender && "-Anonymous"}
         </Card.Subtitle>
         <Button
+          className={props.showDeleteButton()}
           variant="dark"
           color="white"
           onClick={() => props.delete(props.post)}

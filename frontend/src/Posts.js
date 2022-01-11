@@ -8,10 +8,12 @@ import { Row, Col, Container } from "react-bootstrap";
 class Posts extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { posts: [] };
+    this.state = { posts: [], showDelete: false };
 
     this.addNewPost = this.addNewPost.bind(this);
     this.deletePost = this.deletePost.bind(this);
+    this.showDeleteButton = this.showDeleteButton.bind(this);
+    this.handleShowDeleteButton = this.handleShowDeleteButton.bind(this);
   }
 
   async componentDidMount() {
@@ -27,15 +29,14 @@ class Posts extends React.Component {
 
   /**
    * addNewPost adds a new post to the database
-   * 
+   *
    * After randomly deciding for a color, it creates a newPost with all the given information, and then sends that to the database
-   * @param {string} text 
-   * @param {string} sender 
-   * @param {string} title 
+   * @param {string} text
+   * @param {string} sender
+   * @param {string} title
    */
   async addNewPost(text, sender, title) {
     console.log("Adding post");
-
 
     /**
      * randomColor randomly chooses out of 4 bootstrap colors
@@ -86,7 +87,7 @@ class Posts extends React.Component {
 
   /**
    * deletePost finds the id of the post given, and deletes it off the database and state
-   * @param {object} post 
+   * @param {object} post
    */
   async deletePost(post) {
     axios
@@ -97,21 +98,43 @@ class Posts extends React.Component {
             (postToStay) => postToStay.id !== post.id
           ),
         });
-        console.log(this.state.posts);
       })
       .catch((error) => {
         console.log(error);
       });
   }
 
+  handleShowDeleteButton() {
+    this.setState(({showDelete}) => ({ showDelete: !showDelete }));
+    console.log("shoDelete state changed to: " + this.state.showDelete);
+  }
+
+  showDeleteButton() {
+    if (this.state.showDelete) {
+      console.log("returned visible");
+      return "visible";
+    } else {
+      console.log("returned invisible");
+      return "invisible";
+    }
+  }
+
   render() {
     let sortedPosts = this.state.posts.sort((a, b) => b.id - a.id);
     let posts = sortedPosts.map((post) => (
-      <Post key={post.id} post={post} delete={this.deletePost}></Post>
+      <Post
+        key={post.id}
+        post={post}
+        delete={this.deletePost}
+        showDeleteButton={this.showDeleteButton}
+      ></Post>
     ));
     return (
       <>
-        <PostForm post={this.addNewPost}></PostForm>
+        <PostForm
+          post={this.addNewPost}
+          showDelete={this.handleShowDeleteButton}
+        ></PostForm>
 
         <Row className="justify-content-center">{posts}</Row>
       </>
