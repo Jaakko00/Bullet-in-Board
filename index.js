@@ -12,6 +12,6 @@ app.use(express.static("frontend/build"));
 
 app.use("/posts", posts);
 
-const server = app.listen(8080, () => {
+const server = app.listen(process.env.PORT || 8080, () => {
   console.log(`Listening on port ${server.address().port}`);
 });
