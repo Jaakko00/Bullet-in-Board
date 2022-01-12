@@ -18,7 +18,7 @@ class Posts extends React.Component {
 
   async componentDidMount() {
     axios
-      .get("/posts")
+      .get("https://bullet-in-board.herokuapp.com/posts")
       .then((response) => {
         this.setState({ posts: response.data });
       })
@@ -68,14 +68,14 @@ class Posts extends React.Component {
     };
     console.log(newPost);
     axios
-      .post("/posts", newPost)
+      .post("https://bullet-in-board.herokuapp.com/posts", newPost)
       .catch((error) => {
         console.log(error);
       })
       .then((response) => {
         console.log("Added new post");
         axios
-          .get("/posts")
+          .get("https://bullet-in-board.herokuapp.com/posts")
           .then((response) => {
             this.setState({ posts: response.data });
           })
@@ -91,7 +91,7 @@ class Posts extends React.Component {
    */
   async deletePost(post) {
     axios
-      .delete(`/posts/${post.id}`)
+      .delete(`https://bullet-in-board.herokuapp.com/posts/${post.id}`)
       .then((response) => {
         this.setState({
           posts: this.state.posts.filter(

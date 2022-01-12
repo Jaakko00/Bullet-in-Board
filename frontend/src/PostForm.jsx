@@ -7,6 +7,7 @@ import {
   Container,
   Nav,
 } from "react-bootstrap";
+require("dotenv").config();
 
 var filter = require("leo-profanity");
 
@@ -58,7 +59,7 @@ function PostForm(props) {
             <Button
               onClick={() => {
                 if (
-                  password === "admin" ||
+                  password === "Admin2110" ||
                   props.showDeleteButton() === "visible"
                 ) {
                   props.showDelete();
@@ -66,7 +67,7 @@ function PostForm(props) {
                   setDisabled(false);
                 }
                 if (
-                  password === "admin" &&
+                  password === "Admin2110" &&
                   props.showDeleteButton() === "invisible"
                 ) {
                   setDisabled(true);
