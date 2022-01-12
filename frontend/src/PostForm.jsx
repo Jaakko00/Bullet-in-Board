@@ -41,8 +41,8 @@ function PostForm(props) {
     <>
       <Navbar bg="light" expand={false}>
         <Container fluid>
-          <Navbar.Brand href="#" className="display-1">
-            Bulletin board
+          <Navbar.Brand className="display-1">
+            Bullet-in-Board
           </Navbar.Brand>
 
           <Form className="d-flex" style={{ width: "20rem" }}>
