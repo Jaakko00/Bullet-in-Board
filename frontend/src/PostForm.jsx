@@ -15,6 +15,7 @@ function PostForm(props) {
   const [sender, setSender] = useState("");
   const [title, setTitle] = useState("");
   const [password, setPassword] = useState("");
+  const [disabled, setDisabled] = useState("");
 
   /** onChangeContent sets the state of content with given value */
   const onChangeContent = (e) => {
@@ -52,6 +53,7 @@ function PostForm(props) {
               value={password}
               placeholder="Password"
               onChange={onChangePassword}
+              disabled={disabled}
             />
             <Button
               onClick={() => {
@@ -61,6 +63,13 @@ function PostForm(props) {
                 ) {
                   props.showDelete();
                   setPassword("");
+                  setDisabled(false);
+                }
+                if (
+                  password === "admin" &&
+                  props.showDeleteButton() === "invisible"
+                ) {
+                  setDisabled(true);
                 }
               }}
             >
