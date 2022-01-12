@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Button, Form, Offcanvas, Navbar, Container } from "react-bootstrap";
+import {
+  Button,
+  Form,
+  Offcanvas,
+  Navbar,
+  Container,
+  Nav,
+} from "react-bootstrap";
 
 var filter = require("leo-profanity");
 
@@ -37,31 +44,30 @@ function PostForm(props) {
             Bulletin board
           </Navbar.Brand>
 
-          <Form className="m-2" style={{ width: "10rem" }}>
+          <Form className="d-flex" style={{ width: "20rem" }}>
+            <Nav.Link disabled>Admin</Nav.Link>
             <Form.Control
-              className="mb-3"
+              className="me-2"
               type="password"
               value={password}
               placeholder="Password"
               onChange={onChangePassword}
             />
+            <Button
+              onClick={() => {
+                if (
+                  password === "admin" ||
+                  props.showDeleteButton() === "visible"
+                ) {
+                  props.showDelete();
+                  setPassword("");
+                }
+              }}
+            >
+              {props.showDeleteButton() === "invisible" && "Login"}
+              {props.showDeleteButton() === "visible" && "Logout"}
+            </Button>
           </Form>
-
-          <Button
-            type="submit"
-            onClick={() => {
-              if (
-                password === "abc" ||
-                props.showDeleteButton() === "visible"
-              ) {
-                props.showDelete();
-                setPassword("");
-              }
-            }}
-          >
-            {props.showDeleteButton() === "invisible" && "Login"}
-            {props.showDeleteButton() === "visible" && "Logout"}
-          </Button>
 
           <Navbar.Toggle>New post</Navbar.Toggle>
           <Navbar.Offcanvas
@@ -112,19 +118,21 @@ function PostForm(props) {
                 className="m-2"
                 variant="primary"
                 type="submit"
-                onClick={() =>
-                  props
-                    .post(
-                      //filter.clean filters all profanity of a given string
-                      filter.clean(content),
-                      filter.clean(sender),
-                      filter.clean(title)
-                    )
-                    //After posting, the state is emptied to avoid doubleposting
-                    .then(setContent(""))
-                    .then(setSender(""))
-                    .then(setTitle(""))
-                }
+                onClick={() => {
+                  if (content.length && title.length) {
+                    props
+                      .post(
+                        //filter.clean filters all profanity of a given string
+                        filter.clean(content),
+                        filter.clean(sender),
+                        filter.clean(title)
+                      )
+                      //After posting, the state is emptied to avoid doubleposting
+                      .then(setContent(""))
+                      .then(setSender(""))
+                      .then(setTitle(""));
+                  }
+                }}
               >
                 Submit
               </Button>

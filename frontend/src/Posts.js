@@ -106,15 +106,12 @@ class Posts extends React.Component {
 
   handleShowDeleteButton() {
     this.setState(({showDelete}) => ({ showDelete: !showDelete }));
-    console.log("showDelete state changed to: " + this.state.showDelete);
   }
 
   showDeleteButton() {
     if (this.state.showDelete) {
-      console.log("returned visible");
       return "visible";
     } else {
-      console.log("returned invisible");
       return "invisible";
     }
   }
