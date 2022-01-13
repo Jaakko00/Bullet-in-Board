@@ -1,7 +1,7 @@
 ## [Bullet-in-Board](jaakkosaranpaa.com)
 A bulletin/notification board meant for condominiums and schools, where you can anonymously post any concerns. The application also has profanity filtering, so it can be used in family-friendly environments
 
-Long gone are the days of condominium facebook groups, where all people post are complaints. Now you can do just that anonymously with Bullet-in-Board!
+Long gone are the days of condominium facebook groups, where all people post are complaints. Now you can do just that anonymously with Bullet-in-Board! Click the header or [here](http://jaakkosaranpaa.com) to visit the site
  
 ## Screenshots
 ![Näyttökuva 2022-1-13 kello 19 34 46](https://user-images.githubusercontent.com/69541309/149380372-36621aab-399a-4a28-8ad5-c0008cf00af3.png)
