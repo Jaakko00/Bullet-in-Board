@@ -18,6 +18,30 @@ function PostForm(props) {
   const [password, setPassword] = useState("");
   const [disabled, setDisabled] = useState("");
 
+  /**
+   * randomColor randomly chooses out of 4 bootstrap colors, and if admin is logged in, chooses "dark"
+   * @returns {string} color
+   */
+  function randomColor() {
+    var randomnumber = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
+    if(props.showDeleteButton() === "visible") {
+      return "dark";
+    } else {
+      if (randomnumber === 1) {
+        return "success";
+      }
+      if (randomnumber === 2) {
+        return "danger";
+      }
+      if (randomnumber === 3) {
+        return "warning";
+      } else {
+        return "info";
+      }
+
+    }
+  }
+
   /** onChangeContent sets the state of content with given value */
   const onChangeContent = (e) => {
     setContent(e.currentTarget.value);
@@ -42,22 +66,27 @@ function PostForm(props) {
     <>
       <Navbar bg="light" expand={false}>
         <Container fluid>
-          <Navbar.Brand className="display-1">
-            Bullet-in-Board
-          </Navbar.Brand>
+          <Navbar.Brand className="display-1">Bullet-in-Board</Navbar.Brand>
 
+          {/*This form has a password field and a submit button to log in as an admin user*/}
           <Form className="d-flex" style={{ width: "20rem" }}>
             <Nav.Link disabled>Admin</Nav.Link>
             <Form.Control
               className="me-2"
               type="password"
-              value={password}
+              value={password} //Value of the form is its current state
               placeholder="Password"
-              onChange={onChangePassword}
-              disabled={disabled}
+              onChange={onChangePassword} //By changing the value of the form, it gets updated to the state
+              disabled={disabled} //The password form is disabled when you are logged in
             />
             <Button
               onClick={() => {
+                /*
+                If the password is correct or you are already logged in,
+                the delete buttons style toggles, and the password form gets emptied and enabled
+
+                if the password is correct and you are not logged in, the password form gets enabled
+                */
                 if (
                   password === "Admin2110" ||
                   props.showDeleteButton() === "visible"
@@ -99,8 +128,8 @@ function PostForm(props) {
                   className="mb-3"
                   type="text"
                   placeholder="Title"
-                  value={title}
-                  onChange={onChangeTitle}
+                  value={title} //Value of the form is its current state
+                  onChange={onChangeTitle} //By changing the value of the form, it gets updated to the state
                 />
               </Form>
 
@@ -109,8 +138,8 @@ function PostForm(props) {
                   as="textarea"
                   rows={3}
                   placeholder="Text"
-                  value={content}
-                  onChange={onChangeContent}
+                  value={content} //Value of the form is its current state
+                  onChange={onChangeContent} //By changing the value of the form, it gets updated to the state
                 />
               </Form>
 
@@ -119,8 +148,8 @@ function PostForm(props) {
                   className="mb-3"
                   type="text"
                   placeholder="From"
-                  value={sender}
-                  onChange={onChangeSender}
+                  value={sender} //Value of the form is its current state
+                  onChange={onChangeSender} //By changing the value of the form, it gets updated to the state
                 />
               </Form>
 
@@ -129,13 +158,15 @@ function PostForm(props) {
                 variant="primary"
                 type="submit"
                 onClick={() => {
+                  //onClick uses props.post method with all the given information, to send the post to the API
                   if (content.length && title.length) {
                     props
                       .post(
                         //filter.clean filters all profanity of a given string
                         filter.clean(content),
                         filter.clean(sender),
-                        filter.clean(title)
+                        filter.clean(title),
+                        randomColor()
                       )
                       //After posting, the state is emptied to avoid doubleposting
                       .then(setContent(""))
